@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculus 1 — Interactive Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .hero {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 56px;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .hero .tagline {
+      font-size: 21px;
+      color: var(--text-soft);
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+    .chapter-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .chapter-card {
+      background: var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+    .chapter-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      text-decoration: none;
+    }
+    .chapter-card.coming-soon {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .card-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .chapter-card.coming-soon .card-eyebrow { color: var(--text-muted); }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 4px 0 6px;
+    }
+    .card-desc {
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .card-meta {
+      margin-top: auto;
+      padding-top: 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 14px;
+    }
+    .feature-row {
+      max-width: 880px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      text-align: left;
+    }
+    .feature h3 {
+      font-size: 15px;
+      margin: 0 0 6px;
+      color: var(--primary);
+    }
+    .feature p { font-size: 14px; color: var(--text-soft); margin: 0; }
+    @media (max-width: 700px) {
+      .hero { padding-top: 50px; }
+      .hero h1 { font-size: 38px; }
+      .hero .tagline { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="brand" href="index.html">Calc 1 <span class="brand-sub">/ Interactive</span></a>
+    </div>
+    <nav class="topbar-nav">
+      <a href="#chapters">Chapters</a>
+      <a href="https://github.com/Minds-R-Lab/calc1" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Calculus 1, done interactively.</h1>
+    <p class="tagline">A friendly home for single-variable calculus &mdash; explanations, worked examples with step-by-step solutions you reveal at your own pace, and graphs you can play with.</p>
+  </section>
+
+  <section class="feature-row">
+    <div class="feature">
+      <h3>Reveal-as-you-go</h3>
+      <p>Every example hides its solution until you ask. Then you uncover one step at a time.</p>
+    </div>
+    <div class="feature">
+      <h3>Math that looks like math</h3>
+      <p>Equations rendered with MathJax so symbols are clear and copy-able.</p>
+    </div>
+    <div class="feature">
+      <h3>Built for students</h3>
+      <p>Calm typography, sticky chapter outline, mobile-friendly, dark mode automatic.</p>
+    </div>
+  </section>
+
+  <section id="chapters" class="chapter-grid">
+
+    <a href="chapter1.html" class="chapter-card">
+      <span class="card-eyebrow">Chapter 1</span>
+      <div class="card-title">Functions and Limits</div>
+      <p class="card-desc">Domain, range, composition, then the central idea of Calc 1: the limit. Algebraic techniques, one-sided limits, infinity, continuity, the Squeeze Theorem.</p>
+      <div class="card-meta"><span>20 worked examples</span><span>9 sections</span></div>
+    </a>
+
+    <div class="chapter-card coming-soon">
+      <span class="card-eyebrow">Chapter 2 · soon</span>
+      <div class="card-title">The Derivative</div>
+      <p class="card-desc">From limits to instantaneous rates of change. Definition, rules, and the geometry of tangent lines.</p>
+      <div class="card-meta"><span>Coming next</span></div>
+    </div>
+
+    <div class="chapter-card coming-soon">
+      <span class="card-eyebrow">Chapter 3 · soon</span>
+      <div class="card-title">Applications of the Derivative</div>
+      <p class="card-desc">Related rates, optimization, curve sketching, linear approximation, the Mean Value Theorem.</p>
+      <div class="card-meta"><span>Planned</span></div>
+    </div>
+
+    <div class="chapter-card coming-soon">
+      <span class="card-eyebrow">Chapter 4 · soon</span>
+      <div class="card-title">Integration</div>
+      <p class="card-desc">Antiderivatives, the definite integral, and the Fundamental Theorem of Calculus.</p>
+      <div class="card-meta"><span>Planned</span></div>
+    </div>
+
+  </section>
+
+  <footer style="text-align:center; padding: 24px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border);">
+    Made for the Minds R Lab Calculus 1 course · <a href="https://github.com/Minds-R-Lab/calc1" target="_blank" rel="noopener">source on GitHub</a>
+  </footer>
+</body>
+</html>

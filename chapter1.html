@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 1 — Functions and Limits · Calculus 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script>
+    MathJax = {
+      tex: { inlineMath: [["$", "$"], ["\\(", "\\)"]], displayMath: [["$$", "$$"], ["\\[", "\\]"]] },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="progress-bar"></div>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <a class="brand" href="index.html">Calc 1 <span class="brand-sub">/ Interactive</span></a>
+    </div>
+    <nav class="topbar-nav">
+      <a href="index.html">Home</a>
+      <a href="chapter1.html">Ch. 1</a>
+      <a href="https://github.com/Minds-R-Lab/calc1" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h3>In this chapter</h3>
+      <ol>
+        <li><a href="#sec-1">Functions: the basics</a></li>
+        <li><a href="#sec-2">Domain and range</a></li>
+        <li><a href="#sec-3">Combining and composing functions</a></li>
+        <li><a href="#sec-4">The intuitive idea of a limit</a></li>
+        <li><a href="#sec-5">Computing limits algebraically</a></li>
+        <li><a href="#sec-6">One-sided limits</a></li>
+        <li><a href="#sec-7">Limits involving infinity</a></li>
+        <li><a href="#sec-8">Continuity</a></li>
+        <li><a href="#sec-9">The Squeeze Theorem &amp; trig limits</a></li>
+      </ol>
+    </aside>
+
+    <main>
+      <div class="chapter-header">
+        <div class="chapter-eyebrow">Chapter 1</div>
+        <h1>Functions and Limits</h1>
+        <p class="chapter-lede">
+          Calculus is the mathematics of change. Before we can talk about how things change, we need a precise language for the things that <em>do</em> the changing &mdash; functions &mdash; and a tool for examining their behavior up close: the limit.
+        </p>
+      </div>
+
+      <p>
+        This chapter has two halves. The first reviews <strong>functions</strong>: how to read them, where they're defined, and how to build new ones from old. The second introduces the <strong>limit</strong>, the single idea that everything else in Calc&nbsp;1 is built on. Every section ends with worked examples whose steps you can reveal one at a time &mdash; try the problem yourself first, then peek.
+      </p>
+
+      <!-- ============================================================
+           1.1 — Functions
+           ============================================================ -->
+      <h2 id="sec-1">1.1 &nbsp; Functions: the basics</h2>
+
+      <div class="callout definition">
+        <div class="callout-label">Definition</div>
+        <p>A <strong>function</strong> $f$ from a set $D$ (the <em>domain</em>) to a set $Y$ assigns to each input $x \in D$ exactly one output, written $f(x)$.</p>
+      </div>
+
+      <p>The single most important word in that definition is <em>exactly one</em>. A rule that gives two outputs for the same input is not a function. The graph test for this is the <strong>vertical line test</strong>: a curve in the $xy$-plane is the graph of a function of $x$ if and only if no vertical line crosses it more than once.</p>
+
+      <p>Three useful ways to describe a function: by a formula (<code>f(x) = x²</code>), by a graph, or by a table. They're all describing the same kind of object — an input/output rule.</p>
+
+      <!-- Example 1 -->
+      <div class="example" id="ex-1">
+        <div class="example-header">
+          <span class="example-number">Example 1</span>
+          <span class="example-title">Evaluating a function</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            If $f(x) = 2x^2 - 3x + 1$, compute $f(2)$, $f(-1)$, and $f(a+1)$.
+          </div>
+          <p class="try-yourself">Try it yourself first &mdash; substitution only.</p>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Substitute $x = 2$ into the formula and simplify.</p>
+                <div class="math-block">$f(2) = 2(2)^2 - 3(2) + 1 = 8 - 6 + 1 = 3.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Now $x = -1$. Be careful with signs.</p>
+                <div class="math-block">$f(-1) = 2(-1)^2 - 3(-1) + 1 = 2 + 3 + 1 = 6.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>For $f(a+1)$, treat $a+1$ as a single block and expand.</p>
+                <div class="math-block">$f(a+1) = 2(a+1)^2 - 3(a+1) + 1.$</div>
+                <p>Expand $(a+1)^2 = a^2 + 2a + 1$ and distribute:</p>
+                <div class="math-block">$= 2(a^2 + 2a + 1) - 3a - 3 + 1 = 2a^2 + 4a + 2 - 3a - 2 = 2a^2 + a.$</div>
+              </div>
+            </div>
+            <div class="final-answer">
+              $f(2) = 3,\quad f(-1) = 6,\quad f(a+1) = 2a^2 + a.$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.2 — Domain and range
+           ============================================================ -->
+      <h2 id="sec-2">1.2 &nbsp; Domain and range</h2>
+
+      <p>The <strong>domain</strong> is the set of all inputs $x$ for which $f(x)$ produces a real number. The <strong>range</strong> is the set of values $f(x)$ actually takes on. For algebraic functions, the domain is "everything except what breaks the formula." Two things break formulas in Calc&nbsp;1:</p>
+      <ul>
+        <li>division by zero,</li>
+        <li>taking an even root (or a logarithm) of a negative number.</li>
+      </ul>
+
+      <!-- Example 2 -->
+      <div class="example" id="ex-2">
+        <div class="example-header">
+          <span class="example-number">Example 2</span>
+          <span class="example-title">Domain with a square root and a fraction</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Find the domain of $\displaystyle f(x) = \frac{\sqrt{x-3}}{x-5}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Identify what could break the formula. There are two issues: the square root in the numerator, and the denominator.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>The square root requires its argument to be non-negative:</p>
+                <div class="math-block">$x - 3 \ge 0 \quad\Longrightarrow\quad x \ge 3.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>The denominator must not be zero:</p>
+                <div class="math-block">$x - 5 \ne 0 \quad\Longrightarrow\quad x \ne 5.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <p>Intersect both conditions: $x \ge 3$ <em>and</em> $x \ne 5$.</p>
+              </div>
+            </div>
+            <div class="final-answer">Domain: $[3, 5) \cup (5, \infty)$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 3 -->
+      <div class="example" id="ex-3">
+        <div class="example-header">
+          <span class="example-number">Example 3</span>
+          <span class="example-title">Domain of a logarithm</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Find the domain of $g(x) = \ln(4 - x^2)$.
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>The logarithm requires a <em>strictly positive</em> argument:</p>
+                <div class="math-block">$4 - x^2 > 0.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Solve the inequality. Rearrange:</p>
+                <div class="math-block">$x^2 < 4 \quad\Longrightarrow\quad |x| < 2 \quad\Longrightarrow\quad -2 < x < 2.$</div>
+              </div>
+            </div>
+            <div class="final-answer">Domain: $(-2, 2)$.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-label">Common mistake</div>
+        <p>For $\ln$, the inequality is <strong>strict</strong> ($> 0$) because $\ln(0)$ is undefined. For an even root like $\sqrt{\,\cdot\,}$, equality is allowed ($\ge 0$) because $\sqrt{0} = 0$ is fine.</p>
+      </div>
+
+      <!-- ============================================================
+           1.3 — Combining functions
+           ============================================================ -->
+      <h2 id="sec-3">1.3 &nbsp; Combining and composing functions</h2>
+
+      <p>From two functions $f$ and $g$ we can form $f+g$, $f-g$, $fg$, and $f/g$. The most important new operation, though, is <strong>composition</strong>: feed the output of one function into the other.</p>
+
+      <div class="callout definition">
+        <div class="callout-label">Definition</div>
+        <p>The <strong>composition</strong> $f \circ g$ is the function defined by $(f \circ g)(x) = f(g(x))$. Its domain is the set of all $x$ in the domain of $g$ such that $g(x)$ lies in the domain of $f$.</p>
+      </div>
+
+      <!-- Example 4 -->
+      <div class="example" id="ex-4">
+        <div class="example-header">
+          <span class="example-number">Example 4</span>
+          <span class="example-title">Composing two functions</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Let $f(x) = x^2 + 1$ and $g(x) = 2x - 3$. Find $(f \circ g)(x)$ and $(g \circ f)(x)$.
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>$(f \circ g)(x)$ means "apply $g$ first, then $f$." So plug $g(x)$ into $f$:</p>
+                <div class="math-block">$(f \circ g)(x) = f(g(x)) = f(2x - 3) = (2x-3)^2 + 1.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Expand $(2x-3)^2 = 4x^2 - 12x + 9$:</p>
+                <div class="math-block">$(f \circ g)(x) = 4x^2 - 12x + 9 + 1 = 4x^2 - 12x + 10.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>For $(g \circ f)(x)$, apply $f$ first then $g$:</p>
+                <div class="math-block">$(g \circ f)(x) = g(f(x)) = g(x^2 + 1) = 2(x^2 + 1) - 3 = 2x^2 - 1.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$(f \circ g)(x) = 4x^2 - 12x + 10$, $\quad(g \circ f)(x) = 2x^2 - 1$. Order matters!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.4 — Intuitive idea of a limit
+           ============================================================ -->
+      <h2 id="sec-4">1.4 &nbsp; The intuitive idea of a limit</h2>
+
+      <p>The central question of a limit is:</p>
+
+      <div class="callout tip">
+        <div class="callout-label">The limit question</div>
+        <p>As $x$ gets close to some number $a$, what number (if any) is $f(x)$ getting close to?</p>
+      </div>
+
+      <p>The notation $\displaystyle\lim_{x \to a} f(x) = L$ says: as $x$ approaches $a$ (from <em>either</em> side), $f(x)$ approaches $L$. Crucially, we do <strong>not</strong> care about $f(a)$ itself — only what happens <em>near</em> $a$.</p>
+
+      <!-- Example 5 -->
+      <div class="example" id="ex-5">
+        <div class="example-header">
+          <span class="example-number">Example 5</span>
+          <span class="example-title">A limit you can guess from a table</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Estimate $\displaystyle\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$ by plugging in values close to $2$.
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>First try $x = 2$ directly. The numerator is $0$ and so is the denominator — the expression is undefined. So the function isn't defined at $2$, but the limit may still exist.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Try values near $2$ on both sides:</p>
+                <div class="math-block">
+                  $\begin{array}{c|c} x & f(x) \\ \hline 1.9 & 3.9 \\ 1.99 & 3.99 \\ 1.999 & 3.999 \\ 2.001 & 4.001 \\ 2.01 & 4.01 \\ 2.1 & 4.1 \end{array}$
+                </div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>The values are zeroing in on $4$ from both sides.</p>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 2} \frac{x^2 - 4}{x - 2} = 4.$</div>
+          </div>
+        </div>
+      </div>
+
+      <p>Tables and graphs are useful for intuition, but they're slow and they can lie (try $\sin(\pi/x)$ near $0$). What we want is an <em>algebraic</em> way to compute limits.</p>
+
+      <!-- ============================================================
+           1.5 — Computing limits algebraically
+           ============================================================ -->
+      <h2 id="sec-5">1.5 &nbsp; Computing limits algebraically</h2>
+
+      <div class="callout theorem">
+        <div class="callout-label">Limit Laws</div>
+        <p>If $\lim_{x\to a} f(x) = L$ and $\lim_{x\to a} g(x) = M$, then</p>
+        <ul>
+          <li>$\lim(f \pm g) = L \pm M$</li>
+          <li>$\lim(f \cdot g) = L \cdot M$</li>
+          <li>$\lim(f/g) = L/M$ provided $M \ne 0$</li>
+          <li>$\lim c \cdot f = c \cdot L$ for any constant $c$</li>
+        </ul>
+        <p>For polynomials and rational functions where the denominator is non-zero at $a$, the limit equals $f(a)$. Just plug in.</p>
+      </div>
+
+      <p>When direct substitution gives $\dfrac{0}{0}$ — called an <strong>indeterminate form</strong> — the limit may still exist. You need to do algebra to remove the source of the $0/0$. Two go-to techniques:</p>
+      <ol>
+        <li><strong>Factor and cancel</strong> when both numerator and denominator are polynomials sharing a root.</li>
+        <li><strong>Rationalize</strong> by multiplying by the conjugate when a square root is in the way.</li>
+      </ol>
+
+      <!-- Example 6 -->
+      <div class="example" id="ex-6">
+        <div class="example-header">
+          <span class="example-number">Example 6</span>
+          <span class="example-title">Plug-in works</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 2} (3x^2 + 5x - 1)$.
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>This is a polynomial, so direct substitution gives the limit:</p>
+                <div class="math-block">$3(2)^2 + 5(2) - 1 = 12 + 10 - 1 = 21.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$21$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 7 -->
+      <div class="example" id="ex-7">
+        <div class="example-header">
+          <span class="example-number">Example 7</span>
+          <span class="example-title">Factor and cancel (0/0)</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x^2 - x - 6}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Try $x = 3$. Numerator: $9 - 9 = 0$. Denominator: $9 - 3 - 6 = 0$. So we have $\frac{0}{0}$ — indeterminate. Time to factor.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Factor both:</p>
+                <div class="math-block">$\frac{x^2 - 9}{x^2 - x - 6} = \frac{(x-3)(x+3)}{(x-3)(x+2)}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Both share the factor $(x-3)$, the source of the $0/0$. Cancel it (valid because $x \ne 3$ in the limit):</p>
+                <div class="math-block">$= \frac{x+3}{x+2}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <p>Now substitute $x = 3$:</p>
+                <div class="math-block">$\frac{3+3}{3+2} = \frac{6}{5}.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x^2 - x - 6} = \frac{6}{5}.$</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 8 -->
+      <div class="example" id="ex-8">
+        <div class="example-header">
+          <span class="example-number">Example 8</span>
+          <span class="example-title">Rationalize the numerator</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+1} - 1}{x}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Direct substitution gives $\frac{\sqrt{1}-1}{0} = \frac{0}{0}$. We need to clear the square root.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Multiply top and bottom by the conjugate $\sqrt{x+1} + 1$:</p>
+                <div class="math-block">$\frac{\sqrt{x+1}-1}{x} \cdot \frac{\sqrt{x+1}+1}{\sqrt{x+1}+1} = \frac{(x+1) - 1}{x(\sqrt{x+1}+1)}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Simplify the numerator: $(x+1) - 1 = x$. Cancel the $x$:</p>
+                <div class="math-block">$= \frac{x}{x(\sqrt{x+1}+1)} = \frac{1}{\sqrt{x+1}+1}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <p>Now substitute $x = 0$ safely:</p>
+                <div class="math-block">$\frac{1}{\sqrt{1}+1} = \frac{1}{2}.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 0} \frac{\sqrt{x+1} - 1}{x} = \frac{1}{2}.$</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 9 -->
+      <div class="example" id="ex-9">
+        <div class="example-header">
+          <span class="example-number">Example 9</span>
+          <span class="example-title">Difference of cubes</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 1} \frac{x^3 - 1}{x - 1}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Substitution gives $0/0$. Recognize the difference of cubes:</p>
+                <div class="math-block">$x^3 - 1 = (x-1)(x^2 + x + 1).$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Cancel $(x-1)$:</p>
+                <div class="math-block">$\frac{x^3-1}{x-1} = x^2 + x + 1.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Substitute $x = 1$: $1 + 1 + 1 = 3$.</p>
+              </div>
+            </div>
+            <div class="final-answer">$3$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 10 -->
+      <div class="example" id="ex-10">
+        <div class="example-header">
+          <span class="example-number">Example 10</span>
+          <span class="example-title">Combining fractions</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{h \to 0} \frac{\frac{1}{2+h} - \frac{1}{2}}{h}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Combine the two fractions in the numerator over the common denominator $2(2+h)$:</p>
+                <div class="math-block">$\frac{1}{2+h} - \frac{1}{2} = \frac{2 - (2+h)}{2(2+h)} = \frac{-h}{2(2+h)}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>The whole expression becomes</p>
+                <div class="math-block">$\frac{1}{h} \cdot \frac{-h}{2(2+h)} = \frac{-1}{2(2+h)}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Now $h \to 0$ is safe:</p>
+                <div class="math-block">$\frac{-1}{2 \cdot 2} = -\frac{1}{4}.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$-\dfrac{1}{4}$. (You'll see this exact pattern again — it's the derivative of $1/x$ at $x=2$.)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.6 — One-sided limits
+           ============================================================ -->
+      <h2 id="sec-6">1.6 &nbsp; One-sided limits</h2>
+
+      <p>Sometimes a function behaves differently as you approach $a$ from the left ($x \to a^-$) than from the right ($x \to a^+$). We write</p>
+
+      <div class="math-block">$\lim_{x \to a^-} f(x) \quad\text{and}\quad \lim_{x \to a^+} f(x).$</div>
+
+      <div class="callout theorem">
+        <div class="callout-label">Two-sided existence</div>
+        <p>$\displaystyle\lim_{x \to a} f(x) = L$ if and only if <em>both</em> one-sided limits exist and equal $L$.</p>
+      </div>
+
+      <!-- Example 11 -->
+      <div class="example" id="ex-11">
+        <div class="example-header">
+          <span class="example-number">Example 11</span>
+          <span class="example-title">Absolute value — the classic two-sided failure</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Investigate $\displaystyle\lim_{x \to 0} \frac{|x|}{x}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Recall $|x| = x$ when $x > 0$ and $|x| = -x$ when $x < 0$.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Right-hand limit ($x > 0$):</p>
+                <div class="math-block">$\lim_{x \to 0^+} \frac{|x|}{x} = \lim_{x \to 0^+} \frac{x}{x} = 1.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Left-hand limit ($x < 0$):</p>
+                <div class="math-block">$\lim_{x \to 0^-} \frac{|x|}{x} = \lim_{x \to 0^-} \frac{-x}{x} = -1.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <p>The two sides disagree, so the two-sided limit does not exist.</p>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 0^+} \frac{|x|}{x} = 1$, $\;\displaystyle\lim_{x \to 0^-} \frac{|x|}{x} = -1$, two-sided limit does not exist.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 12 -->
+      <div class="example" id="ex-12">
+        <div class="example-header">
+          <span class="example-number">Example 12</span>
+          <span class="example-title">Piecewise function</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Let $f(x) = \begin{cases} x^2 + 1, & x < 1 \\ 3x - 1, & x \ge 1 \end{cases}$. Does $\displaystyle\lim_{x \to 1} f(x)$ exist?
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>From the left, $x < 1$ so we use $x^2 + 1$:</p>
+                <div class="math-block">$\lim_{x \to 1^-} f(x) = 1^2 + 1 = 2.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>From the right, $x \ge 1$ so we use $3x - 1$:</p>
+                <div class="math-block">$\lim_{x \to 1^+} f(x) = 3(1) - 1 = 2.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Both one-sided limits equal $2$, so the two-sided limit exists.</p>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 1} f(x) = 2.$</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.7 — Limits involving infinity
+           ============================================================ -->
+      <h2 id="sec-7">1.7 &nbsp; Limits involving infinity</h2>
+
+      <p>"Infinity" shows up in two different ways in limits:</p>
+      <ul>
+        <li><strong>Infinite limits:</strong> $\lim_{x\to a} f(x) = \pm\infty$ — the function grows without bound as $x$ approaches a finite point $a$. This is the picture of a <em>vertical asymptote</em>.</li>
+        <li><strong>Limits at infinity:</strong> $\lim_{x\to\pm\infty} f(x) = L$ — we ask what $f$ does for very large (or very negative) $x$. This is the picture of a <em>horizontal asymptote</em>.</li>
+      </ul>
+
+      <!-- Example 13 -->
+      <div class="example" id="ex-13">
+        <div class="example-header">
+          <span class="example-number">Example 13</span>
+          <span class="example-title">A vertical asymptote</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Investigate $\displaystyle\lim_{x \to 2} \frac{1}{(x-2)^2}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>As $x \to 2$, the denominator $(x-2)^2$ approaches $0$. The squared term is always positive, so the denominator is a tiny positive number.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>$\dfrac{1}{\text{tiny positive}}$ is huge and positive. So from <em>either</em> side, the value grows without bound:</p>
+                <div class="math-block">$\lim_{x \to 2} \frac{1}{(x-2)^2} = +\infty.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$+\infty$. The function has a vertical asymptote at $x = 2$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 14 -->
+      <div class="example" id="ex-14">
+        <div class="example-header">
+          <span class="example-number">Example 14</span>
+          <span class="example-title">Horizontal asymptote of a rational function</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to \infty} \frac{3x^2 + 2x}{5x^2 - x + 1}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>For large $x$, the highest-power terms dominate. Divide every term by $x^2$ (the highest power in the denominator):</p>
+                <div class="math-block">$\frac{3x^2 + 2x}{5x^2 - x + 1} = \frac{3 + \frac{2}{x}}{5 - \frac{1}{x} + \frac{1}{x^2}}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>As $x \to \infty$, every term with $x$ in the denominator vanishes:</p>
+                <div class="math-block">$\to \frac{3 + 0}{5 - 0 + 0} = \frac{3}{5}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Quick shortcut: for a rational function, when the numerator and denominator have the <em>same</em> degree, the limit at $\pm\infty$ is the ratio of leading coefficients.</p>
+              </div>
+            </div>
+            <div class="final-answer">$\dfrac{3}{5}$. The line $y = 3/5$ is a horizontal asymptote.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 15 -->
+      <div class="example" id="ex-15">
+        <div class="example-header">
+          <span class="example-number">Example 15</span>
+          <span class="example-title">A tricky one with a square root</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to \infty} \left(\sqrt{x^2 + 1} - x\right).$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Both terms blow up, giving an indeterminate $\infty - \infty$. Rationalize by multiplying by the conjugate over itself:</p>
+                <div class="math-block">$\left(\sqrt{x^2+1} - x\right) \cdot \frac{\sqrt{x^2+1} + x}{\sqrt{x^2+1} + x} = \frac{(x^2+1) - x^2}{\sqrt{x^2+1} + x}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>The numerator simplifies to $1$:</p>
+                <div class="math-block">$= \frac{1}{\sqrt{x^2+1} + x}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>As $x \to \infty$, the denominator $\to \infty$, so the whole fraction $\to 0$.</p>
+              </div>
+            </div>
+            <div class="final-answer">$0$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.8 — Continuity
+           ============================================================ -->
+      <h2 id="sec-8">1.8 &nbsp; Continuity</h2>
+
+      <div class="callout definition">
+        <div class="callout-label">Definition</div>
+        <p>$f$ is <strong>continuous at $a$</strong> if all three of the following hold:</p>
+        <ol>
+          <li>$f(a)$ is defined,</li>
+          <li>$\displaystyle\lim_{x \to a} f(x)$ exists,</li>
+          <li>$\displaystyle\lim_{x \to a} f(x) = f(a)$.</li>
+        </ol>
+      </div>
+
+      <p>Informally: you can draw the graph through $x = a$ without lifting your pencil. When continuity fails, the trouble comes in flavors:</p>
+      <ul>
+        <li><strong>Removable</strong> — a single missing or "wrong" point. The limit exists, but doesn't match $f(a)$. Fixable by redefining one value.</li>
+        <li><strong>Jump</strong> — the two one-sided limits exist but disagree.</li>
+        <li><strong>Infinite</strong> — the function blows up to $\pm\infty$.</li>
+      </ul>
+
+      <!-- Example 16 -->
+      <div class="example" id="ex-16">
+        <div class="example-header">
+          <span class="example-number">Example 16</span>
+          <span class="example-title">Classify the discontinuity</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Where is $\displaystyle f(x) = \frac{x^2 - 1}{x - 1}$ discontinuous? What kind?
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>$f$ is undefined at $x = 1$ (denominator $0$), so something fails there. Test the limit.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Factor: $\dfrac{x^2-1}{x-1} = \dfrac{(x-1)(x+1)}{x-1} = x + 1$ (for $x \ne 1$).</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>So $\displaystyle\lim_{x\to 1} f(x) = 2$, which is a finite number — but $f(1)$ doesn't exist. The limit exists, but $f$ doesn't match it at $x=1$. That's a <strong>removable</strong> discontinuity.</p>
+              </div>
+            </div>
+            <div class="final-answer">Removable discontinuity at $x = 1$. Defining $f(1) = 2$ would make $f$ continuous there.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 17 -->
+      <div class="example" id="ex-17">
+        <div class="example-header">
+          <span class="example-number">Example 17</span>
+          <span class="example-title">Make a piecewise function continuous</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            For what value of $k$ is $f(x) = \begin{cases} x^2 + k, & x \le 2 \\ 3x - 1, & x > 2 \end{cases}$ continuous everywhere?
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Each piece is a polynomial, so continuous on its own. The only worry is the joining point $x = 2$.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>For continuity at $2$, the left value, right limit, and $f(2)$ must all agree:</p>
+                <div class="math-block">$\lim_{x \to 2^-} f(x) = 4 + k, \qquad \lim_{x \to 2^+} f(x) = 5.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Set them equal:</p>
+                <div class="math-block">$4 + k = 5 \quad\Longrightarrow\quad k = 1.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$k = 1$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           1.9 — Squeeze theorem and trig limits
+           ============================================================ -->
+      <h2 id="sec-9">1.9 &nbsp; The Squeeze Theorem and trig limits</h2>
+
+      <div class="callout theorem">
+        <div class="callout-label">Squeeze (Sandwich) Theorem</div>
+        <p>If $g(x) \le f(x) \le h(x)$ for all $x$ near $a$ (except possibly at $a$), and $\displaystyle\lim_{x \to a} g(x) = \lim_{x \to a} h(x) = L$, then $\displaystyle\lim_{x \to a} f(x) = L$.</p>
+      </div>
+
+      <p>The Squeeze Theorem is the right tool when a function wiggles too wildly to plug in or factor — typically because it has $\sin$ or $\cos$ of something like $1/x$ in it.</p>
+
+      <!-- Example 18 -->
+      <div class="example" id="ex-18">
+        <div class="example-header">
+          <span class="example-number">Example 18</span>
+          <span class="example-title">A wild oscillation tamed</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Show that $\displaystyle\lim_{x \to 0} x^2 \sin\!\left(\tfrac{1}{x}\right) = 0.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>$\sin(1/x)$ oscillates between $-1$ and $1$ as $x \to 0$, so we cannot just "plug in" the inside. But we can bound the whole thing.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>For any $x \ne 0$, $-1 \le \sin(1/x) \le 1$. Multiply by $x^2$, which is non-negative (so the inequalities don't flip):</p>
+                <div class="math-block">$-x^2 \le x^2 \sin(1/x) \le x^2.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Both outer functions have limit $0$ as $x \to 0$. By the Squeeze Theorem, so does the middle.</p>
+              </div>
+            </div>
+            <div class="final-answer">$\displaystyle\lim_{x \to 0} x^2 \sin(1/x) = 0.$</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Two trig limits you must memorize</h3>
+
+      <div class="callout theorem">
+        <div class="callout-label">Fundamental trig limits</div>
+        <div class="math-block">$\lim_{x \to 0} \frac{\sin x}{x} = 1, \qquad \lim_{x \to 0} \frac{1 - \cos x}{x} = 0.$</div>
+        <p>These are not optional. Almost every trig limit you'll meet in Calc&nbsp;1 reduces to one of these two.</p>
+      </div>
+
+      <!-- Example 19 -->
+      <div class="example" id="ex-19">
+        <div class="example-header">
+          <span class="example-number">Example 19</span>
+          <span class="example-title">Match the pattern of sin x / x</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 0} \frac{\sin(5x)}{3x}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>We want the inside of the sine to match the denominator. The trick is to multiply and divide by $5$:</p>
+                <div class="math-block">$\frac{\sin(5x)}{3x} = \frac{5}{3} \cdot \frac{\sin(5x)}{5x}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>As $x \to 0$, the new "inside" $u = 5x$ also goes to $0$, so $\dfrac{\sin(5x)}{5x} \to 1$.</p>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Therefore the limit is $\dfrac{5}{3} \cdot 1 = \dfrac{5}{3}.$</p>
+              </div>
+            </div>
+            <div class="final-answer">$\dfrac{5}{3}.$</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 20 -->
+      <div class="example" id="ex-20">
+        <div class="example-header">
+          <span class="example-number">Example 20</span>
+          <span class="example-title">Combine the two trig limits</span>
+        </div>
+        <div class="example-body">
+          <div class="problem">
+            <span class="problem-label">Problem</span>
+            Evaluate $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x^2}.$
+          </div>
+          <button class="solution-toggle"><span class="label">Show step-by-step solution</span><span class="arrow">▾</span></button>
+          <div class="solution-content">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <p>Multiply top and bottom by the conjugate $1 + \cos x$:</p>
+                <div class="math-block">$\frac{1 - \cos x}{x^2} \cdot \frac{1 + \cos x}{1 + \cos x} = \frac{1 - \cos^2 x}{x^2(1 + \cos x)}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <p>Use $1 - \cos^2 x = \sin^2 x$:</p>
+                <div class="math-block">$= \frac{\sin^2 x}{x^2(1 + \cos x)} = \left(\frac{\sin x}{x}\right)^2 \cdot \frac{1}{1 + \cos x}.$</div>
+                <button class="step-reveal">Next step →</button>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <p>Take the limit. The first piece goes to $1^2 = 1$ and the second piece goes to $\dfrac{1}{1 + 1} = \dfrac{1}{2}$:</p>
+                <div class="math-block">$\to 1 \cdot \frac{1}{2} = \frac{1}{2}.$</div>
+              </div>
+            </div>
+            <div class="final-answer">$\dfrac{1}{2}.$ This limit is the secret ingredient behind the second derivative of $\cos x$ at $0$.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           Wrap-up
+           ============================================================ -->
+      <h2 id="recap">Chapter recap</h2>
+
+      <p>In a sentence: a function is a rule, a limit is a question about behavior <em>near</em> a point, and continuity is the rule that makes the limit and the function agree.</p>
+
+      <p>The toolbox for computing limits in Calc&nbsp;1:</p>
+      <ol>
+        <li><strong>Plug in.</strong> If the function is a polynomial, rational (away from zeros), or any algebraic combination of continuous functions, just substitute.</li>
+        <li><strong>If you get $\tfrac{0}{0}$, do algebra.</strong> Factor and cancel, rationalize, combine fractions — whatever kills the shared root.</li>
+        <li><strong>For $\pm\infty$, compare growth.</strong> Divide by the highest power in the denominator; the leading coefficients win.</li>
+        <li><strong>Wild oscillation?</strong> Squeeze it.</li>
+        <li><strong>Trig at zero?</strong> Reshape into $\dfrac{\sin u}{u}$ or $\dfrac{1 - \cos u}{u}$.</li>
+      </ol>
+
+      <p>In <strong>Chapter 2</strong> we use these limits to define <em>the derivative</em>.</p>
+
+      <p style="margin-top:48px; text-align:center; color: var(--text-muted); font-size:14px;">
+        End of Chapter 1 &nbsp;·&nbsp; <a href="index.html">Back to home</a>
+      </p>
+    </main>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
